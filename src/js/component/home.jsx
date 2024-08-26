@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import Contact from "./contact";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import About from "./about";
+import Service from "./service";
+import Header from "./header";
 
-//create your first component
 const Home = () => {
+	const [texto,setTexto] = useState('texto inicial')
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+		<>
+		<BrowserRouter>
+			<Header />
+			<Routes>
+				<Route path="/" element={<About />} />
+				<Route path="/contactanos" element={<Contact />} />
+				<Route path="/servicios" element={<Service />} />
+			</Routes>
+			<p>{texto}</p>
+			<p><button onClick={()=>setTexto('actualizado')}>Cambiar texto</button> </p>
+			<h3>Footer</h3>
+		</BrowserRouter>
+		</>		
 	);
 };
 
